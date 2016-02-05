@@ -87,6 +87,8 @@ func (m *Settings) Redirect(w http.ResponseWriter, r *http.Request) {
 	for _, v := range m.Redirects {
 		if v.Shortname == sh {
 			url = v.Url
+			h := w.Header()
+			h.Set("Cache-Control", "private, no-cache")
 			http.Redirect(w, r, url+"/"+args, 302)
 			break
 		}
