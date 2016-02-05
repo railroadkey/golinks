@@ -27,7 +27,7 @@ func main() {
 	configFile := flag.String("config", "redirects.json", "Port number to listen")
 	flag.Parse()
 	log.Printf("Starting golinks...")
-	r := NewRedirector(*configFile)
+	r := newRedirector(*configFile)
 	r.ReadConfig()
 
 	http.HandleFunc("/add/", r.AddLink)
@@ -41,9 +41,9 @@ func main() {
 	}
 }
 
-func NewRedirector(file string) *Settings {
-	return &Settings{
-		Filename: file,
+func newRedirector(file string) *settings {
+	return &settings{
+		filename: file,
 	}
 }
 
