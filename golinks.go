@@ -87,7 +87,7 @@ func (m *Settings) Redirect(w http.ResponseWriter, r *http.Request) {
 	for _, v := range m.Redirects {
 		if v.Shortname == sh {
 			url = v.Url
-			http.Redirect(w, r, url+"/"+args, 301)
+			http.Redirect(w, r, url+"/"+args, 302)
 			break
 		}
 	}
@@ -117,7 +117,7 @@ func (m *Settings) AddLink(w http.ResponseWriter, r *http.Request) {
 
 	if len(req) >= 2 {
 		// Ensure proper formatting for redirect url.
-		var validUrl = regexp.MustCompile(`^[a-z,A-Z,0-9,-,_,/,:,\.]+$`)
+		var validUrl = regexp.MustCompile(`^[a-z, ,A-Z,0-9,-,_,/,:,\.]+$`)
 		if !validUrl.MatchString(req[1]) {
 			SendHtml(w, "Redirect url should be fully qualified URL http://something")
 			return
