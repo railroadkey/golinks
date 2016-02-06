@@ -74,7 +74,7 @@ func (m *settings) saveToDisk() error {
 func (m *settings) getLinks(w http.ResponseWriter, r *http.Request) {
         var s string
         for _, v := range m.redirects {
-                s += v.shortname + "->" + v.url + "<BR>"
+                s += fmt.Sprintf("Shortname: %s -> Url: %s  Count %d <BR>", v.Shortname, v.Url, v.Requests)
         }
         sendHtml(w, s)
 }
